@@ -346,18 +346,18 @@
   const ITEMS = [
     {
       id: "wongolyo",
-      icon: "✍️",
+      icon: "📝",
       name: "원고료",
       sub: "원고 작성 관련 지급 기준",
       checks: [
         { label: "영수증 (법인카드전표/현금영수증/세금계산서)", tags: ["필수", "공통"] },
-        { label: "원고 납품 확인서 (제목·분량·납품일 포함)", tags: ["필수", "지정서식"] },
+        { label: "원고 제출 확인서 (제목·분량 포함)", tags: ["필수", "지정서식"] },
         { label: "저작권 이용 동의서", tags: ["필수", "지정서식"] },
       ],
       warns: [
         { text: "원고료 지급 전 반드시 원고 납품 완료 확인", danger: false },
         { text: "동일인에게 연간 지급 한도 초과 여부 확인 필수", danger: false },
-        { text: "🚫 미납품 원고에 대한 선지급 절대 불가", danger: true },
+        { text: "🚫 미납 원고에 대한 선지급 절대 불가", danger: true },
       ],
       // 서식 파일 경로를 여기에 입력하세요 (files 폴더 안에 파일을 넣고 경로 입력)
       downloads: [
@@ -367,7 +367,7 @@
     },
     {
       id: "hoeuibi",
-      icon: "👥",
+      icon: "🗣️",
       name: "회의비",
       sub: "1인당 30,000원 이내",
       checks: [
@@ -391,7 +391,7 @@
     },
     {
       id: "gangsaryo",
-      icon: "🎓",
+      icon: "🎤",
       name: "강사료",
       sub: "강의 및 특강 강사 지급 기준",
       checks: [
