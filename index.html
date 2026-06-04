@@ -7,13 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary: #0ea5c9;
-      --primary-dark: #0284a0;
+      --primary: #0e6e8e;
       --primary-light: #e0f7fc;
-      --accent: #06d6a0;
-      --warn-bg: #fffbeb;
-      --warn-border: #f59e0b;
-      --warn-text: #92400e;
       --danger: #ef4444;
       --text: #1e293b;
       --text-secondary: #64748b;
@@ -23,400 +18,338 @@
       --radius: 14px;
       --shadow: 0 2px 12px rgba(14,165,201,0.08);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+    body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-    /* ── 헤더 ── */
-    header {
-      background: linear-gradient(135deg, #0f3460 0%, #0e6e8e 60%, #00b4d8 100%);
-      padding: 2rem 1.5rem 1.5rem;
-      color: white;
-    }
-    .header-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      opacity: 0.9;
-      margin-bottom: 1rem;
-    }
-    .badge {
-      background: rgba(255,255,255,0.25);
-      border-radius: 6px;
-      padding: 2px 8px;
-      font-weight: 700;
-      font-size: 12px;
-    }
-    header h1 {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
-    header h1 span { font-weight: 300; }
-    header p {
-      font-size: 13px;
-      opacity: 0.85;
-      margin-bottom: 1.25rem;
-    }
-    .quick-btns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    /* 헤더 */
+    header { background: linear-gradient(135deg, #0f3460 0%, #0e6e8e 60%, #00b4d8 100%); padding: 2rem 1.5rem 1.5rem; color: white; }
+    .header-top { display: flex; align-items: center; gap: 10px; font-size: 13px; opacity: 0.9; margin-bottom: 1rem; }
+    .badge { background: rgba(255,255,255,0.25); border-radius: 6px; padding: 2px 8px; font-weight: 700; font-size: 12px; }
+    header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    header p { font-size: 13px; opacity: 0.85; margin-bottom: 1.25rem; }
+    .quick-btns { display: flex; flex-wrap: wrap; gap: 8px; }
     .quick-btn {
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: white;
-      border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-family: inherit;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+      color: white; border-radius: 20px; padding: 5px 14px; font-size: 13px;
+      cursor: pointer; font-family: inherit; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 5px; transition: background 0.2s;
     }
-    .quick-btn:hover { background: rgba(255,255,255,0.35); }
+    .quick-btn:hover, .quick-btn.active { background: rgba(255,255,255,0.35); }
 
-    /* ── 공지 바 ── */
-    .notice-bar {
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      padding: 0.75rem 1.5rem;
-      font-size: 13px;
-      color: var(--primary-dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    /* 공지바 */
+    .notice-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; font-size: 13px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
     .notice-bar strong { color: var(--danger); }
 
-    /* ── 메인 ── */
-    main { padding: 1.5rem; max-width: 900px; margin: 0 auto; }
+    /* 탭 메뉴 */
+    .tab-menu { background: white; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; }
+    .tab-btn { padding: 0.9rem 1.25rem; font-size: 14px; font-weight: 500; color: var(--text-secondary); border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; font-family: inherit; background: none; border-top: none; border-left: none; border-right: none; transition: color 0.2s; }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-    .section-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
+    /* 탭 콘텐츠 */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    /* ── 항목 그리드 ── */
-    .item-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 10px;
-      margin-bottom: 1.5rem;
-    }
-    .item-card {
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem 0.75rem;
-      cursor: pointer;
-      text-align: center;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-    .item-card:hover {
-      border-color: var(--primary);
-      box-shadow: var(--shadow);
-    }
-    .item-card.active {
-      background: #0ea5c9;
-      border-color: #0ea5c9;
-      color: white;
-    }
+    main { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+
+    /* 섹션 타이틀 */
+    .section-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .section-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.25rem; }
+
+    /* 집행 불가 사항 */
+    .forbidden-box { background: #fff5f5; border: 1px solid #fecaca; border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+    .forbidden-title { font-size: 13px; font-weight: 700; color: #991b1b; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+    .forbidden-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .forbidden-tag { background: white; border: 1px solid #fca5a5; color: #7f1d1d; border-radius: 20px; padding: 4px 12px; font-size: 12px; }
+
+    /* 항목 그리드 */
+    .grid-label { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .grid-sublabel { font-size: 13px; color: var(--text-secondary); margin-bottom: 1rem; }
+    .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+    .item-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1rem 0.75rem; cursor: pointer; text-align: center; transition: border-color 0.2s, box-shadow 0.2s, background 0.2s; }
+    .item-card:hover { border-color: var(--primary); box-shadow: var(--shadow); }
+    .item-card.active { background: #0e6e8e; border-color: #0e6e8e; color: white; }
     .item-card .icon { font-size: 26px; margin-bottom: 8px; }
-    .item-card .name { font-size: 14px; font-weight: 500; }
+    .item-card .name { font-size: 13px; font-weight: 500; }
 
-    /* ── 상세 패널 ── */
-    .detail-panel {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-    .detail-header {
-      background: #f8fafc;
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    /* 상세 패널 */
+    .detail-panel { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 2rem; }
+    .detail-header { background: #f8fafc; border-bottom: 1px solid var(--border); padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
     .detail-header-left h2 { font-size: 17px; font-weight: 700; }
     .detail-header-left p { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-    .reset-btn {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 5px 12px;
-      font-size: 12px;
-      cursor: pointer;
-      font-family: inherit;
-      color: var(--text-secondary);
-      transition: border-color 0.2s;
-    }
+    .reset-btn { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; font-size: 12px; cursor: pointer; font-family: inherit; color: var(--text-secondary); }
     .reset-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-    /* 진행바 */
     .progress-wrap { padding: 0.75rem 1.25rem 0; }
     .progress-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
     .progress-bar { height: 6px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, #0ea5c9, #06d6a0); border-radius: 99px; transition: width 0.3s; }
-
-    /* 체크리스트 */
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #0f3460, #00b4d8); border-radius: 99px; transition: width 0.3s; }
     .checklist { padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 12px; }
     .check-item { display: flex; align-items: flex-start; gap: 12px; }
-    .check-item input[type="checkbox"] {
-      width: 18px; height: 18px; margin-top: 2px;
-      accent-color: var(--primary); cursor: pointer; flex-shrink: 0;
-    }
+    .check-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--primary); cursor: pointer; flex-shrink: 0; }
     .check-item label { cursor: pointer; font-size: 14px; line-height: 1.5; flex: 1; }
     .check-item.checked label { text-decoration: line-through; color: var(--text-secondary); }
     .tag-row { display: flex; gap: 5px; margin-top: 4px; flex-wrap: wrap; }
-    .tag {
-      font-size: 11px; font-weight: 700; border-radius: 5px;
-      padding: 2px 7px;
-    }
-    .tag.required { background: #0ea5c9; color: white; }
+    .tag { font-size: 11px; font-weight: 700; border-radius: 5px; padding: 2px 7px; }
+    .tag.required { background: #0e6e8e; color: white; }
     .tag.form { background: #f1f5f9; color: #475569; }
     .tag.common { background: #e0f2fe; color: #0369a1; }
+    .warn-box { margin: 0 1.25rem 1.25rem; background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 1rem 1.1rem; }
+    .warn-box .warn-title { font-size: 13px; font-weight: 700; color: #92400e; margin-bottom: 8px; }
+    .warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .warn-list li { font-size: 13px; color: #78350f; padding-left: 10px; border-left: 2px solid #fbbf24; line-height: 1.5; }
+    .warn-list li.danger { border-left-color: var(--danger); color: #991b1b; }
+    .download-box { margin: 0 1.25rem 1.25rem; padding: 1rem 1.1rem; background: #f8fafc; border-radius: 10px; border: 1px solid var(--border); }
+    .download-title { font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-bottom: 10px; }
+    .download-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .dl-btn { background: white; border: 1.5px solid var(--primary); color: var(--primary); border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 5px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .dl-btn:hover { background: var(--primary); color: white; }
 
     /* 결제 방법 */
-    .warn-box {
-      margin: 0 1.25rem 1.25rem;
-      background: var(--warn-bg);
-      border: 1px solid #fde68a;
-      border-radius: 10px;
-      padding: 1rem 1.1rem;
-    }
-    .warn-box .warn-title {
-      font-size: 13px; font-weight: 700;
-      color: var(--warn-text); margin-bottom: 8px;
-      display: flex; align-items: center; gap: 5px;
-    }
-    .warn-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .warn-list li {
-      font-size: 13px; color: #78350f;
-      padding-left: 10px;
-      border-left: 2px solid #fbbf24;
-      line-height: 1.5;
-    }
-    .warn-list li.danger { border-left-color: var(--danger); color: #991b1b; }
+    .payment-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+    .payment-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+    .payment-card-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .badge-required { background: #0f3460; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .payment-tip { background: #f0f9ff; border-radius: 8px; padding: 0.75rem 1rem; font-size: 13px; color: #0369a1; margin-bottom: 0.75rem; font-weight: 500; }
+    .payment-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 0.75rem; }
+    .payment-step { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.5; }
+    .step-num { background: #0f3460; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .payment-warn { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 0.65rem 1rem; font-size: 13px; color: #92400e; font-weight: 500; }
 
-    /* 서식 다운로드 */
-    .download-box {
-      margin: 0 1.25rem 1.25rem;
-      padding: 1rem 1.1rem;
-      background: #f8fafc;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-    .download-title {
-      font-size: 13px; font-weight: 700; color: var(--text-secondary);
-      margin-bottom: 10px; display: flex; align-items: center; gap: 5px;
-    }
-    .download-btns { display: flex; flex-wrap: wrap; gap: 8px; }
-    .dl-btn {
-      background: white;
-      border: 1.5px solid var(--primary);
-      color: var(--primary);
-      border-radius: 8px;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-    .dl-btn:hover { background: var(--primary); color: white; }
-    .dl-btn.disabled {
-      border-color: var(--border);
-      color: var(--text-secondary);
-      cursor: default;
-      pointer-events: none;
-    }
+    /* 서식 다운로드 탭 */
+    .dl-section { margin-bottom: 1.25rem; }
+    .dl-section-title { font-size: 14px; font-weight: 700; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .dl-list { display: flex; flex-wrap: wrap; gap: 8px; }
 
-    /* ── 푸터 ── */
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-secondary);
-      padding: 1.5rem;
-      border-top: 1px solid var(--border);
-      background: white;
-    }
+    /* 문의처 */
+    .contact-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+    .contact-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.9; }
+
+    footer { text-align: center; font-size: 12px; color: var(--text-secondary); padding: 1.5rem; border-top: 1px solid var(--border); background: white; margin-top: 2rem; }
   </style>
 </head>
 <body>
 
-<!-- ── 헤더 ── -->
 <header>
   <div class="header-top">
     <span class="badge">SWU</span>
     서울여자대학교 · RISE사업단
   </div>
   <h1><strong>서울여대 RISE사업비 지침 안내</strong></h1>
-  <p>지출 항목별 제출서류 체크 · 주의사항 · 서식 다운로드</p>
+  <p>지출 항목별 제출서류 체크 · 결제 방법 · 서식 다운로드</p>
   <div class="quick-btns">
-    <a class="quick-btn" href="#checklist">📋 체크리스트</a>
-    <a class="quick-btn" href="#payment">💳 결제 방법</a>
-    <a class="quick-btn" href="#download">📎 서식 다운로드</a>
-    <a class="quick-btn" href="#contact">📞 문의처</a>
+    <button class="quick-btn" onclick="switchTab('checklist')">📋 체크리스트</button>
+    <button class="quick-btn" onclick="switchTab('payment')">💳 결제 방법</button>
+    <button class="quick-btn" onclick="switchTab('download')">📎 서식 다운로드</button>
+    <button class="quick-btn" onclick="switchTab('contact')">📞 문의처</button>
   </div>
 </header>
 
-<!-- ── 공지 바 ── -->
 <div class="notice-bar">
   📌 <strong>공지:</strong>&nbsp;2026년도 RISE사업 지침과 관련하여 안내드립니다. 반드시 확인하여 주세요.
 </div>
 
-<!-- ── 메인 ── -->
+<!-- 탭 메뉴 -->
+<div class="tab-menu">
+  <button class="tab-btn active" id="tab-checklist" onclick="switchTab('checklist')">📋 체크리스트</button>
+  <button class="tab-btn" id="tab-payment" onclick="switchTab('payment')">💳 결제 방법</button>
+  <button class="tab-btn" id="tab-download" onclick="switchTab('download')">📎 서식 다운로드</button>
+  <button class="tab-btn" id="tab-contact" onclick="switchTab('contact')">📞 문의처</button>
+</div>
+
 <main>
 
-  <!-- 항목 선택 -->
-  <p class="section-label" id="checklist">항목을 선택하세요</p>
-  <div class="item-grid" id="itemGrid">
-    <!-- 항목 카드는 JS로 생성 -->
-  </div>
-
-  <!-- 상세 패널 -->
-  <div class="detail-panel" id="detailPanel" style="display:none;">
-    <div class="detail-header">
-      <div class="detail-header-left">
-        <h2 id="panelTitle"></h2>
-        <p id="panelSub"></p>
+  <!-- ── 체크리스트 탭 ── -->
+  <div class="tab-content active" id="content-checklist">
+    <!-- 집행 불가 사항 -->
+    <div class="forbidden-box">
+      <div class="forbidden-title">🚫 집행 불가 사항</div>
+      <div class="forbidden-tags">
+        <span class="forbidden-tag">개인용 물품 구매</span>
+        <span class="forbidden-tag">주류(술) 포함 지출</span>
+        <span class="forbidden-tag">사업목적과 무관한 식비·경비</span>
+        <span class="forbidden-tag">사전 승인 없는 예산 변경 집행</span>
+        <span class="forbidden-tag">증빙자료 미비 또는 허위 작성</span>
+        <span class="forbidden-tag">개인 신용카드 결제 후 환급</span>
+        <span class="forbidden-tag">개인 휴대폰 번호로 발행된 현금영수증</span>
       </div>
-      <button class="reset-btn" onclick="resetChecks()">초기화</button>
     </div>
-    <div class="progress-wrap">
-      <div class="progress-label" id="progressLabel">0 / 0 확인 완료</div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    </div>
-    <div class="checklist" id="checklist-items"></div>
-    <div class="warn-box" id="notice">
-      <div class="warn-title">⚠️ 주의사항</div>
-      <ul class="warn-list" id="warnList"></ul>
-    </div>
-    <div class="download-box" id="download">
-      <div class="download-title">📎 관련 서식 다운로드</div>
-      <div class="download-btns" id="downloadBtns"></div>
+
+    <!-- 지출 항목 선택 -->
+    <div class="grid-label">지출 항목 선택</div>
+    <div class="grid-sublabel">해당 항목을 선택하면 필수 제출서류와 주의사항을 확인할 수 있습니다.</div>
+    <div class="item-grid" id="itemGrid"></div>
+
+    <!-- 상세 패널 -->
+    <div class="detail-panel" id="detailPanel" style="display:none;">
+      <div class="detail-header">
+        <div class="detail-header-left">
+          <h2 id="panelTitle"></h2>
+          <p id="panelSub"></p>
+        </div>
+        <button class="reset-btn" onclick="resetChecks()">초기화</button>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label" id="progressLabel">0 / 0 확인 완료</div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+      <div class="checklist" id="checklist-items"></div>
+      <div class="warn-box">
+        <div class="warn-title">⚠️ 주의사항</div>
+        <ul class="warn-list" id="warnList"></ul>
+      </div>
+      <div class="download-box">
+        <div class="download-title">📎 관련 서식 다운로드</div>
+        <div class="download-btns" id="downloadBtns"></div>
+      </div>
     </div>
   </div>
 
-  <!-- 문의처 -->
-  <div id="contact" style="background:white; border-radius:var(--radius); border:1px solid var(--border); padding:1.25rem; margin-bottom:1.5rem;">
-    <p class="section-label" style="margin-bottom:0.5rem;">문의처</p>
-    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7;">
-      📍 서울여자대학교 AI융합교육혁신센터<br>
-      📧 이메일: <strong>담당자 이메일을 입력하세요</strong><br>
-      📞 연락처: <strong>담당자 연락처를 입력하세요</strong>
-    </p>
+  <!-- ── 결제 방법 탭 ── -->
+  <div class="tab-content" id="content-payment">
+    <div class="section-title">결제 방법 안내</div>
+    <div class="section-sub">사업비는 아래 방법으로만 집행 가능합니다. 모든 지출은 법인카드를 우선 사용해 주세요.</div>
+
+    <!-- 법인카드 -->
+    <div class="payment-card">
+      <div class="payment-card-header">
+        <div class="payment-card-title">💳 법인카드 (우리카드)</div>
+        <span class="badge-required">★ 필수 권장</span>
+      </div>
+      <div class="payment-tip">💡 법인카드로 결제하는 것이 가장 간편하고 정확합니다.</div>
+      <div class="payment-steps">
+        <div class="payment-step"><span class="step-num">1</span><span>법인카드로 결제</span></div>
+        <div class="payment-step"><span class="step-num">2</span><span>종합정보시스템 접속 → 카드 사용내역 지정<br><small style="color:#64748b">재원: 대학혁신지원사업 / 사용용도: 교비 / 부서: 대학혁신지원사업 설정 후 저장</small></span></div>
+        <div class="payment-step"><span class="step-num">3</span><span>증빙자료 이메일 제출 — 담당자 이메일을 입력하세요</span></div>
+      </div>
+      <div class="payment-warn">⚠️ 법인카드 결제일 매월 27일 — 결제일 전 반드시 증빙 제출 완료 / 카드 발급 약 2주 소요</div>
+    </div>
+
+    <!-- 전자세금계산서 -->
+    <div class="payment-card">
+      <div class="payment-card-title" style="margin-bottom:0.75rem;">🧾 전자세금계산서</div>
+      <div class="section-sub" style="margin-bottom:0.75rem;">거래처로부터 전자세금계산서를 발급받아 산학기획팀에 정산 요청</div>
+      <div class="payment-steps">
+        <div class="payment-step"><span class="step-num">1</span><span>거래처에 전자세금계산서 발행 요청 — 사업자번호: <strong>217-82-01035 (서울여자대학교)</strong></span></div>
+        <div class="payment-step"><span class="step-num">2</span><span>전자세금계산서 수취 즉시 증빙자료와 함께 <strong>산학기획팀에 정산 요청</strong></span></div>
+        <div class="payment-step"><span class="step-num">3</span><span>산학기획팀에서 지출품의를 통해 거래처에 대금 지급</span></div>
+      </div>
+      <div class="payment-warn">⚠️ 세금계산서 수취 후 즉시 정산 요청 필수</div>
+    </div>
+  </div>
+
+  <!-- ── 서식 다운로드 탭 ── -->
+  <div class="tab-content" id="content-download">
+    <div class="section-title">서식 다운로드</div>
+    <div class="section-sub">항목별 필요 서식을 다운로드하세요.</div>
+
+    <!-- ━━ 여기서 서식 파일 추가/수정 가능 ━━ -->
+    <div class="dl-section">
+      <div class="dl-section-title">📝 원고료</div>
+      <div class="dl-list">
+        <a class="dl-btn" href="files/원고납품확인서.hwp" download>⬇ 원고 납품 확인서</a>
+        <a class="dl-btn" href="files/저작권동의서.hwp" download>⬇ 저작권 이용 동의서</a>
+      </div>
+    </div>
+    <div class="dl-section">
+      <div class="dl-section-title">👥 회의비</div>
+      <div class="dl-list">
+        <a class="dl-btn" href="files/회의록.hwp" download>⬇ 회의록</a>
+        <a class="dl-btn" href="files/참석자서명부.hwp" download>⬇ 참석자 서명부</a>
+      </div>
+    </div>
+    <div class="dl-section">
+      <div class="dl-section-title">🎓 강사료</div>
+      <div class="dl-list">
+        <a class="dl-btn" href="files/강사료지급기준.hwp" download>⬇ 강사료 지급기준</a>
+        <a class="dl-btn" href="files/강의확인서.hwp" download>⬇ 강의확인서</a>
+        <a class="dl-btn" href="files/강사료지급신청서.hwp" download>⬇ 강사료 지급 신청서</a>
+      </div>
+    </div>
+    <!-- 새 항목 추가할 때 위 형식으로 복사해서 붙여넣기 하세요 -->
+  </div>
+
+  <!-- ── 문의처 탭 ── -->
+  <div class="tab-content" id="content-contact">
+    <div class="section-title">문의처</div>
+    <div class="section-sub">RISE사업 관련 문의는 아래 담당자에게 연락해주세요.</div>
+    <div class="contact-card">
+      <p>
+        📍 서울여자대학교 RISE사업단<br>
+        📧 이메일: <strong>담당자 이메일을 입력하세요</strong><br>
+        📞 연락처: <strong>담당자 연락처를 입력하세요</strong><br>
+        🕐 운영시간: <strong>평일 09:00 ~ 18:00</strong>
+      </p>
+    </div>
   </div>
 
 </main>
 
-<footer>
-  서울여자대학교 AI융합교육혁신센터 · 문의사항은 담당자에게 연락해주세요
-</footer>
+<footer>서울여자대학교 RISE사업단 · 문의사항은 담당자에게 연락해주세요</footer>
 
 <script>
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // 여기서 내용을 수정할 수 있어요!
+  // 여기서 항목 내용을 수정할 수 있어요!
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
   const ITEMS = [
     {
-      id: "wongolyo",
-      icon: "📝",
-      name: "원고료",
-      sub: "원고 작성 관련 지급 기준",
+      id: "wongolyo", icon: "📝", name: "원고료", sub: "원고 작성 관련 지급 기준",
       checks: [
         { label: "영수증 (법인카드전표/현금영수증/세금계산서)", tags: ["필수", "공통"] },
-        { label: "원고 제출 확인서 (제목·분량 포함)", tags: ["필수", "지정서식"] },
+        { label: "원고 납품 확인서 (제목·분량·납품일 포함)", tags: ["필수", "지정서식"] },
         { label: "저작권 이용 동의서", tags: ["필수", "지정서식"] },
       ],
       warns: [
-        { text: "원고료 지급 전 반드시 원고 완료 확인", danger: false },
-        { text: "동일인에게 연간 지급 한도(최대 1천만원) 초과 여부 확인 필수", danger: false },
-        { text: "🚫 미납 원고에 대한 선지급 절대 불가", danger: true },
+        { text: "원고료 지급 전 반드시 원고 납품 완료 확인", danger: false },
+        { text: "동일인에게 연간 지급 한도 초과 여부 확인 필수", danger: false },
+        { text: "🚫 미납품 원고에 대한 선지급 절대 불가", danger: true },
       ],
-      // 서식 파일 경로를 여기에 입력하세요 (files 폴더 안에 파일을 넣고 경로 입력)
       downloads: [
-        { label: "원고 확인서 양식", file: "files/원고납품확인서.hwp" },
-        { label: "저작권 이용 동의서 양식", file: "files/저작권동의서.hwp" },
+        { label: "원고 납품 확인서", file: "files/원고납품확인서.hwp" },
+        { label: "저작권 이용 동의서", file: "files/저작권동의서.hwp" },
       ]
     },
     {
-      id: "hoeuibi",
-      icon: "🗣️",
-      name: "회의비",
-      sub: "1인당 25,000원 이내",
+      id: "hoeuibi", icon: "🗣️", name: "회의비", sub: "1인당 30,000원 이내",
       checks: [
-{ label: "영수증 (<span style='color:#ef4444; font-weight:700'>반드시 RISE사업비 카드 사용(개인법인카드 사용 불가)</span>)", tags: ["필수", "공통"] },
+        { label: "영수증 (반드시 <span style='color:#ef4444; font-weight:700'>RISE사업비 카드 사용(개인법인카드 사용 불가)</span>)", tags: ["필수", "공통"] },
         { label: "회의록 (일시·장소·참석자·안건·논의내용 포함)", tags: ["필수", "지정서식"] },
         { label: "참석자 서명부 (이름 및 서명 필수)", tags: ["필수", "지정서식"] },
       ],
       warns: [
         { text: "프로젝트 수행계획서(예산)에 관련 항목이 포함되어 있어야 함", danger: false },
-        { text: "1인당 25,000원 이내 (식사+다과 포함)", danger: false },
-        { text: "단, 외부회의 관련 식비 및 다과비는 청탁금지법에 따라 5만원 이내에서 지급", danger: false },
-        { text: "외부인이 참석하지 않는 대학 내부 관계자 회의 집행 불가", danger: true },
-        { text: "⚠️ 주말·공휴일·자정 이후 불가", danger: false },
+        { text: "1인당 30,000원 이내 (식사+다과 포함)", danger: false },
+        { text: "⚠️ 주말·공휴일·자정 이후 원칙적 불가 (불가피한 경우 사전 논의)", danger: false },
         { text: "🚫 주류(술) 포함 영수증 절대 불가", danger: true },
-        { text: "다과비 인당 8,000원 이내. 또한 개별 품목 확인 가능한 영수증 제출", danger: false },
+        { text: "다과비는 개별 품목 확인 가능한 영수증 제출", danger: false },
         { text: "회의안건 및 논의내용 구체적으로 작성 필수", danger: false },
       ],
       downloads: [
-        { label: "회의록 양식", file: "files/회의록.hwp" },
-        { label: "참석자서명부 양식", file: "files/참석자서명부.hwp" },
+        { label: "회의록", file: "files/회의록.hwp" },
+        { label: "참석자 서명부", file: "files/참석자서명부.hwp" },
       ]
     },
     {
-      id: "gangsaryo",
-      icon: "🎤",
-      name: "강사료",
-      sub: "강의 및 특강 강사 지급 기준",
+      id: "gangsaryo", icon: "🎤", name: "강사료", sub: "강의 및 특강 강사 지급 기준",
       checks: [
-        { label: "강사료 지급 신청서", tags: ["필수", "공통"] },
+        { label: "영수증 또는 강사료 지급 신청서", tags: ["필수", "공통"] },
         { label: "강의확인서 (일시·장소·강의명·시간 포함)", tags: ["필수", "지정서식"] },
         { label: "강사 통장사본 및 신분증 사본", tags: ["필수"] },
         { label: "원천징수영수증 (세금 처리 확인)", tags: ["필수"] },
       ],
       warns: [
-        { text: "강사료 지급 기준 단가 반드시 확인 후 집행", danger: false },
+        { label: "강사료지급기준", file: "files/강사료지급기준.hwp" },
+        { text: "강사료 지급 기준 단가 확인 후 집행", danger: false },
         { text: "교내 교원은 강사료 지급 불가 (규정 확인 필수)", danger: true },
         { text: "⚠️ 사전 승인 없는 강사 변경 불가", danger: false },
         { text: "🚫 현금 지급 절대 불가 — 반드시 계좌이체", danger: true },
       ],
       downloads: [
         { label: "강사료 지급기준", file: "files/강사료지급기준.hwp" },
+        { label: "강의확인서", file: "files/강의확인서.hwp" },
         { label: "강사료 지급 신청서", file: "files/강사료지급신청서.hwp" },
       ]
     },
     {
-      id: "yuuisahang",
-      icon: "📌 ",
-      name: "지출품의시<br>유의사항",
-      sub: "지출품의서 작성 전 반드시 확인하세요",
+      id: "yuuisahang", icon: "📌", name: "지출품의시<br>유의사항", sub: "지출 전 반드시 확인하세요",
       checks: [],
       warns: [
         { text: "ㄱ. 내용을 입력해주세요", danger: false },
@@ -425,13 +358,21 @@
         { text: "ㄹ. 내용을 입력해주세요", danger: false },
       ],
       downloads: []
-    }
-    ];
+    },
+  ];
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // 아래는 건드리지 않아도 돼요
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
   let currentItem = null;
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('content-' + tab).classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
 
   function renderGrid() {
     const grid = document.getElementById("itemGrid");
@@ -446,7 +387,6 @@
   function selectItem(id) {
     document.querySelectorAll(".item-card").forEach(c => c.classList.remove("active"));
     document.getElementById("card-" + id).classList.add("active");
-
     currentItem = ITEMS.find(i => i.id === id);
     renderDetail(currentItem);
     document.getElementById("detailPanel").style.display = "block";
@@ -454,10 +394,8 @@
   }
 
   function renderDetail(item) {
-    document.getElementById("panelTitle").textContent = item.icon + " " + item.name;
+    document.getElementById("panelTitle").innerHTML = item.icon + " " + item.name;
     document.getElementById("panelSub").textContent = item.sub;
-
-    // 체크리스트
     const cl = document.getElementById("checklist-items");
     cl.innerHTML = item.checks.map((c, i) => `
       <div class="check-item" id="ci-${i}">
@@ -465,22 +403,17 @@
         <div>
           <label for="cb-${i}">${c.label}</label>
           <div class="tag-row">
-            ${c.tags.map(t => `<span class="tag ${t === '필수' ? 'required' : t === '공통' ? 'common' : 'form'}">${t}</span>`).join("")}
+            ${c.tags.map(t => `<span class="tag ${t==='필수'?'required':t==='공통'?'common':'form'}">${t}</span>`).join("")}
           </div>
         </div>
       </div>
     `).join("");
-
-    // 주의사항
-    document.getElementById("warnList").innerHTML = item.warns.map(w =>
-      `<li class="${w.danger ? 'danger' : ''}">${w.text}</li>`
-    ).join("");
-
-    // 서식 다운로드
+    document.getElementById("warnList").innerHTML = item.warns
+      .filter(w => w.text)
+      .map(w => `<li class="${w.danger?'danger':''}">${w.text}</li>`).join("");
     document.getElementById("downloadBtns").innerHTML = item.downloads.map(d =>
       `<a class="dl-btn" href="${d.file}" download>⬇ ${d.label}</a>`
     ).join("");
-
     updateProgress();
   }
 
@@ -488,13 +421,11 @@
     if (!currentItem) return;
     const total = currentItem.checks.length;
     const checked = document.querySelectorAll("#checklist-items input:checked").length;
-
     document.getElementById("progressLabel").textContent = `${checked} / ${total} 확인 완료`;
-    document.getElementById("progressFill").style.width = `${(checked / total) * 100}%`;
-
+    document.getElementById("progressFill").style.width = total ? `${(checked/total)*100}%` : '0%';
     currentItem.checks.forEach((_, i) => {
-      const ci = document.getElementById("ci-" + i);
-      const cb = document.getElementById("cb-" + i);
+      const ci = document.getElementById("ci-"+i);
+      const cb = document.getElementById("cb-"+i);
       if (cb.checked) ci.classList.add("checked"); else ci.classList.remove("checked");
     });
   }
