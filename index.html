@@ -338,21 +338,21 @@
       id: "wongolyo", icon: "📝", name: "원고료", sub: "원고 작성 관련 지급 기준",
       checks: [
         { label: "영수증 (법인카드전표/현금영수증/세금계산서)", tags: ["필수", "공통"] },
-        { label: "원고 납품 확인서 (제목·분량·납품일 포함)", tags: ["필수", "지정서식"] },
+        { label: "원고 확인서 (제목·분량 포함)", tags: ["필수", "지정서식"] },
         { label: "저작권 이용 동의서", tags: ["필수", "지정서식"] },
       ],
       warns: [
-        { text: "원고료 지급 전 반드시 원고 납품 완료 확인", danger: false },
+        { text: "원고료 지급 전 반드시 원고 완료 확인", danger: false },
         { text: "동일인에게 연간 지급 한도 초과 여부 확인 필수", danger: false },
-        { text: "🚫 미납품 원고에 대한 선지급 절대 불가", danger: true },
+        { text: "🚫 미완료 원고에 대한 선지급 절대 불가", danger: true },
       ],
       downloads: [
-        { label: "원고 납품 확인서", file: "files/원고납품확인서.hwp" },
+        { label: "원고 확인서", file: "files/원고확인서.hwp" },
         { label: "저작권 이용 동의서", file: "files/저작권동의서.hwp" },
       ]
     },
     {
-      id: "hoeuibi", icon: "🗣️", name: "회의비", sub: "1인당 30,000원 이내",
+      id: "hoeuibi", icon: "🗣️", name: "회의비", sub: "1인당 25,000원 이내",
       checks: [
         { label: "영수증 (반드시 <span style='color:#ef4444; font-weight:700'>RISE사업비 카드 사용(개인법인카드 사용 불가)</span>)", tags: ["필수", "공통"] },
         { label: "회의록 (일시·장소·참석자·안건·논의내용 포함)", tags: ["필수", "지정서식"] },
@@ -375,8 +375,9 @@
     {
       id: "gangsaryo", icon: "🎤", name: "강사료", sub: "강의 및 특강 강사 지급 기준",
       checks: [
-        { label: "영수증 또는 강사료 지급 신청서", tags: ["필수", "공통"] },
+        { label: "강사료 지급 신청서", tags: ["필수", "공통"] },
         { label: "강의확인서 (일시·장소·강의명·시간 포함)", tags: ["필수", "지정서식"] },
+                { label: "강사 이력서(경력사항 필수)", tags: ["필수"] },
         { label: "강사 통장사본 및 신분증 사본", tags: ["필수"] },
         { label: "원천징수영수증 (세금 처리 확인)", tags: ["필수"] },
       ],
