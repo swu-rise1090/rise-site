@@ -419,16 +419,15 @@
       ]
     },
     {
-      id: "yeobi", icon: "✈️", name: "여비", sub: "출장 관련 지급 기준",
+      id: "yeobi", icon: "✈️", name: "여비(출장비)", sub: "출장 관련 지급 기준",
       checks: [
-        { label: "여비 지급 신청서", tags: ["필수", "지정서식"] },
-        { label: "출장 확인서 (출장내용 포함)", tags: ["필수", "지정서식"] },
-        { label: "영수증 (교통비/숙박비 등)", tags: ["필수"] },
+        { label: "대학 자체 규정 준용 지급.", tags: ["필수"] },
+        { label: "출장품의 및 지급명세서(종합정보시스템을 통하여 사전신청, 총무인사팀 접수까지 완료", tags: ["필수", "공통"] },
+        { label: "출장 확인서 (공문, 초청장 등)", tags: ["필수", "공통"] },
       ],
       warns: [
-        { text: "여비 지급 기준 단가 확인 후 집행", danger: false },
-        { text: "출장 내용 구체적으로 작성 필수", danger: false },
-        { text: "🚫 현금 지급 절대 불가 — 반드시 계좌이체", danger: true },
+        { text: "출장 전 종합정보시스템 출장신청 필수_사후 처리 불가", danger: false },
+        { text: "국외 출장 시 사전 문의하여 주시기 바랍니다.", danger: false },
       ],
       downloads: [
         { label: "여비 지급 신청서", file: "files/여비 지급 신청서.hwp" },
@@ -436,12 +435,14 @@
     },
     {
       id: "yuuisahang", icon: "📌", name: "지출품의시<br>유의사항", sub: "지출 전 반드시 확인하세요",
-      checks: [],
+      checks: [ 
+        { label: "회계구분 : 비등금회계 및 발의부서 (17602) RISE사업단 확인", tags: ["필수"] },
+        { label: "재원구분 : RISE사업비 확인", tags: ["필수"] },
+      ],
       warns: [
         { text: "사용한 공용법인카드 지출은 결제일인 27일 전까지.", danger: false },
         { text: "공용법인카드/전자세금계산서 [정산/자동이체] 선택.", danger: false },
-        { text: "ㄷ. 내용을 입력해주세요", danger: false },
-        { text: "ㄹ. 내용을 입력해주세요", danger: false },
+        { text: "누락된 첨부파일 없는지 확인.", danger: false },
       ],
       downloads: []
     },
