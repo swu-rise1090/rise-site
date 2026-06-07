@@ -23,6 +23,7 @@
 
     /* 헤더 */
     header { background: linear-gradient(135deg, #0f3460 0%, #0e6e8e 60%, #00b4d8 100%); padding: 2rem 1.5rem 1.5rem; color: white; }
+    .header-inner { max-width: 900px; margin: 0 auto; }
     .header-top { display: flex; align-items: center; gap: 10px; font-size: 13px; opacity: 0.9; margin-bottom: 1rem; }
     .badge { background: rgba(255,255,255,0.25); border-radius: 6px; padding: 2px 8px; font-weight: 700; font-size: 12px; }
     header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
@@ -37,11 +38,13 @@
     .quick-btn:hover, .quick-btn.active { background: rgba(255,255,255,0.35); }
 
     /* 공지바 */
-    .notice-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; font-size: 13px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    .notice-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; font-size: 13px; color: var(--primary); }
+    .notice-bar-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 8px; }
     .notice-bar strong { color: var(--danger); }
 
     /* 탭 메뉴 */
-    .tab-menu { background: white; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; }
+    .tab-menu { background: white; border-bottom: 1px solid var(--border); }
+    .tab-menu-inner { max-width: 900px; margin: 0 auto; display: flex; overflow-x: auto; }
     .tab-btn { padding: 0.9rem 1.25rem; font-size: 14px; font-weight: 500; color: var(--text-secondary); border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; font-family: inherit; background: none; border-top: none; border-left: none; border-right: none; transition: color 0.2s; }
     .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
 
@@ -129,6 +132,7 @@
 <body>
 
 <header>
+  <div class="header-inner">
   <div class="header-top">
     <span class="badge">SWU</span>
     서울여자대학교 · RISE사업단
@@ -141,18 +145,23 @@
     <button class="quick-btn" onclick="switchTab('download')">📎 서식 다운로드</button>
     <button class="quick-btn" onclick="switchTab('contact')">📞 문의처</button>
   </div>
+  </div>
 </header>
 
 <div class="notice-bar">
+  <div class="notice-bar-inner">
   📌 <strong>공지:</strong>&nbsp;2026년도 RISE사업 지침과 관련하여 안내드립니다. 반드시 확인하여 주세요.
+  </div>
 </div>
 
 <!-- 탭 메뉴 -->
 <div class="tab-menu">
+  <div class="tab-menu-inner">
   <button class="tab-btn active" id="tab-checklist" onclick="switchTab('checklist')">📋 체크리스트</button>
   <button class="tab-btn" id="tab-payment" onclick="switchTab('payment')">💳 결제 방법</button>
   <button class="tab-btn" id="tab-download" onclick="switchTab('download')">📎 서식 다운로드</button>
   <button class="tab-btn" id="tab-contact" onclick="switchTab('contact')">📞 문의처</button>
+  </div>
 </div>
 
 <main>
