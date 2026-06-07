@@ -438,13 +438,20 @@
       checks: [ 
         { label: "회계구분 : 비등금회계 및 발의부서 (17602) RISE사업단 확인", tags: ["필수"] },
         { label: "재원구분 : RISE사업비 확인", tags: ["필수"] },
+        { label: "영수증(법인카드전표/세금계산서)", tags: ["필수"] },
+        { label: "견적서 1부", tags: ["필수"] },
+                { label: "비교견적서 : 50만원 이상 1부, 100만원 이상 2부", tags: ["조건부"] },
+                        { label: "가검수조서(50만원 이상 소모품 구매시 실물사진포함)", tags: ["조건부","지정양식"] },
+                { label: "소모품 부서 검수", tags: ["조건부"] },
       ],
       warns: [
         { text: "사용한 공용법인카드 지출은 결제일인 27일 전까지.", danger: false },
         { text: "공용법인카드/전자세금계산서 [정산/자동이체] 선택.", danger: false },
         { text: "누락된 첨부파일 없는지 확인.", danger: false },
       ],
-      downloads: []
+      downloads: [ 
+        { label: "가검수조서", file: "files/가검수조서.hwp" },
+                 ]
     },
       {
          id: "jiphaenggijeun",
