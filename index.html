@@ -252,7 +252,7 @@
         <div class="warn-title">⚠️ 주의사항</div>
         <ul class="warn-list" id="warnList"></ul>
       </div>
-      <div class="download-box">
+      <div class="download-box" id="downloadSection">
         <div class="download-title">📎 관련 서식 다운로드</div>
         <div class="download-btns" id="downloadBtns"></div>
       </div>
@@ -527,9 +527,15 @@
     document.getElementById("warnList").innerHTML = item.warns
       .filter(w => w.text)
       .map(w => `<li class="${w.danger?'danger':''}">${w.text}</li>`).join("");
-    document.getElementById("downloadBtns").innerHTML = item.downloads.map(d =>
-      `<a class="dl-btn" href="${d.file}" download>⬇ ${d.label}</a>`
-    ).join("");
+    const dlSection = document.getElementById("downloadSection");
+    if (item.downloads && item.downloads.length > 0) {
+      dlSection.style.display = "block";
+      document.getElementById("downloadBtns").innerHTML = item.downloads.map(d =>
+        `<a class="dl-btn" href="${d.file}" download>⬇ ${d.label}</a>`
+      ).join("");
+    } else {
+      dlSection.style.display = "none";
+    }
     updateProgress();
   }
 
