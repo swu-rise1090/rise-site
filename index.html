@@ -378,6 +378,20 @@
       ]
     },
     {
+      id: "gyogwamokgaebalbi", icon: "📚", name: "교과목개발비", sub: "교과목 개발 관련 지급 기준",
+      checks: [
+        { label: "해당 교과목 개발 결과보고서 (제목·분량 포함)", tags: ["필수", "자유양식"] },
+      ],
+      warns: [
+        { text: "교과목개발비 지급 전 반드시 개발 완료 확인", danger: false },
+        { text: "동일인에게 연간 지급 한도 초과 여부 확인 필수", danger: false },
+        { text: "🚫 미완료 교과목에 대한 선지급 절대 불가", danger: true },
+      ],
+      downloads: [
+        { label: "원고료지급기준", file: "files/원고료지급기준.hwp" },
+      ]
+    },
+    {
       id: "gangsaryo", icon: "🎤", name: "강사료", sub: "강의 및 특강 강사 지급 기준",
       checks: [
         { label: "강사료 지급 내역서 및 신청서", tags: ["필수", "지정서식"] },
@@ -499,8 +513,8 @@
     document.getElementById('tab-' + tab).classList.add('active');
   }
 
-  const MAIN_IDS = ["wongolyo", "gangsaryo", "hoeuibi", "jamunryo", "yeobi"];
-  const SUB_IDS = ["yuuisahang", "jiphaenggijeun"];
+  const MAIN_IDS = ["wongolyo", "gyogwamokgaebalbi", "gangsaryo", "hoeuibi", "jamunryo"];
+  const SUB_IDS = ["yeobi", "yuuisahang", "jiphaenggijeun"];
 
   function renderGrid() {
     const grid = document.getElementById("itemGrid");
