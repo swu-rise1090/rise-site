@@ -324,7 +324,7 @@
       </div>
     </div>
     <div class="dl-section">
-      <div class="dl-section-title">👥 회의비 등</div>
+      <div class="dl-section-title">👥 회의비/간담회</div>
       <div class="dl-list">
         <a class="dl-btn" href="files/회의비지침.hwp" download>⬇ 회의비지침</a>
         <a class="dl-btn" href="files/회의록 및 참석자 서명부 서식.hwp" download>⬇ 회의록 및 참석자 서명부 서식</a>
@@ -417,6 +417,7 @@
       ],
       warns: [
         { text: "강사료 지급 기준 단가 확인 후 집행", danger: false },
+                { text: "1일 최대 6시간, 1학기 최대 4회로 제한", danger: false },
         { text: "참석자 명단 자유양식", danger: false },
         { text: "⚠️ 사전 승인 없는 강사 변경 불가", danger: false },
         { text: "🚫 현금 지급 절대 불가 — 반드시 계좌이체", danger: true },
@@ -427,7 +428,7 @@
       ]
     },
     {
-      id: "hoeuibi", icon: "🗣️", name: "회의비 등", sub: "<span style=\"background:#FAECE7; color:#4A1B0C; font-weight:700; padding:2px 6px; border-radius:4px;\">1인당 30,000원 이내</span>",
+      id: "hoeuibi", icon: "🗣️", name: "회의비/간담회", sub: "<span style=\"background:#FAECE7; color:#4A1B0C; font-weight:700; padding:2px 6px; border-radius:4px;\">1인당 30,000원 이내</span>",
       checks: [
         { label: "영수증 (<span style='color:#ef4444; font-weight:700'>반드시 보조금 카드(e나라도움)사용(개인법인카드 사용 불가)</span>)", tags: ["필수", "공통"] },
         { label: "회의록 (일시·장소·참석자·안건·논의내용 포함)", tags: ["필수", "지정서식"] },
@@ -459,6 +460,7 @@
       ],
       warns: [
                 { text: "자문은 1회 기준으로 작성", danger: false },
+                        { text: "강사료와 동일한 등급/단가 기준 적용", danger: false },
         { text: "자문 내용 자문인 본인이 구체적으로 작성 필수", danger: false },
         { text: "🚫 현금 지급 절대 불가 — 반드시 계좌이체", danger: true },
       ],
